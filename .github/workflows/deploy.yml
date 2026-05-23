@@ -78,7 +78,7 @@ jobs:
       # Code health scan — runs vcqa post-deploy and uploads the JSON report
       # + badge SVG to R2 so the console and store listings can display them.
       - name: Code health scan
-        run: npx @vibecodeqa/cli --json --badge > /dev/null 2>&1 || true
+        run: npx @vibecodeqa/cli@0.31 --json --badge > /dev/null 2>&1 || true
       - name: Upload code health
         if: always()
         env:
