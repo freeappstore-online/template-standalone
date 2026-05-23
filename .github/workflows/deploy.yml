@@ -50,6 +50,10 @@ jobs:
       #   env:
       #     VITE_GOOGLE_CLIENT_ID: ${{ vars.VITE_GOOGLE_CLIENT_ID }}
       - name: Build
+        env:
+          VITE_APP_VERSION: ${{ github.event.repository.name }}@${{ github.run_number }}
+          VITE_COMMIT_SHA: ${{ github.sha }}
+          VITE_BUILD_DATE: ${{ github.event.head_commit.timestamp }}
         run: pnpm build
 
       # Guard against empty/missing dist: aws s3 sync from an empty directory
