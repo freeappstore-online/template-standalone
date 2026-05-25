@@ -12,6 +12,11 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2,wasm,json}'],
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+        // Serve index.html for all navigation requests (SPA fallback).
+        // Without this, opening from iPhone home screen shows blank —
+        // the SW intercepts the navigation but has no response for it.
+        navigateFallback: '/index.html',
+        navigateFallbackDenylist: [/^\/api/, /^\/v1/],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
