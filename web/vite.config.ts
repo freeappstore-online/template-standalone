@@ -38,20 +38,9 @@ export default defineConfig({
           },
         ],
       },
-      manifest: {
-        name: 'APPNAME',
-        short_name: 'APPNAME',
-        description: 'Free APPNAME app — part of FreeAppStore',
-        start_url: '/',
-        display: 'standalone',
-        background_color: '#ffffff',
-        theme_color: '#111111',
-        orientation: 'any',
-        icons: [
-          { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
-          { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
-        ],
-      },
+      // Manifest is defined in web/public/manifest.json (single source of truth).
+      // VitePWA reads it from there automatically when manifest is false.
+      manifest: false,
     }),
   ],
   server: { host: true },
