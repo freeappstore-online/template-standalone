@@ -12,6 +12,11 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2,wasm,json}'],
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+        // Force the new SW to activate immediately instead of waiting for
+        // all tabs to close. Combined with registerType: 'autoUpdate' this
+        // ensures users always get the latest deploy without a manual refresh.
+        skipWaiting: true,
+        clientsClaim: true,
         // Serve index.html for all navigation requests (SPA fallback).
         // Without this, opening from iPhone home screen shows blank —
         // the SW intercepts the navigation but has no response for it.
