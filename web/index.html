@@ -12,7 +12,10 @@
     <script>
       // Set theme + loading background before first paint. Prevents flash.
       // Devs: change the colors below to match your app's brand.
-      var d = matchMedia('(prefers-color-scheme: dark)').matches;
+      // The user's choice from the Shell's theme toggle wins over the system.
+      var t = null;
+      try { t = localStorage.getItem('stores-theme'); } catch (e) {}
+      var d = t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
       if (d) document.documentElement.dataset.theme = 'dark';
       document.documentElement.style.background = d ? '#000000' : '#ffffff';
     </script>

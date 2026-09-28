@@ -9,12 +9,13 @@ npm i -g @freeappstore/cli
 fas init my-app
 ```
 
-The CLI clones this template, replaces every `freeappstore` placeholder with your app id, runs `git init`, and makes the first commit — the result is a runnable app you can `pnpm dev` immediately.
+The CLI clones this template, replaces every `APPNAME` placeholder with your app id, runs `git init`, and makes the first commit — the result is a runnable app you can `pnpm dev` immediately.
 
 ## What's in here
 
-- `web/` — Vite + React + TypeScript app, ESM-only, no Tailwind config needed (utility classes via inline styles + the `Shell` component).
-- `web/src/components/Shell.tsx` — sidebar layout with brand fonts (Manrope + Fraunces), CSS variables (`--paper`, `--ink`, `--accent`), and dark-mode support out of the box.
+- `web/` — Vite + React + TypeScript + Tailwind 4 app, ESM-only.
+- `web/src/App.tsx` — the app wrapped in the SDK's `Shell` (`@freeappstore/sdk/ui`) with two starter screens, Home (`/`) and About (`/about`), declared in its `nav` prop. A new app renders the standard topbar, its navigation (`<nav aria-label="Main">`), an error boundary, toasts and an offline banner from the first render. No sign-in required.
+- `web/src/index.css` — brand fonts (Manrope + Fraunces) and the design tokens (`--paper`, `--ink`, `--accent`, …); dark mode via `:root[data-theme='dark']`, which the SDK sets from the system or the Shell's theme toggle.
 - `web/src/main.tsx` — React entry point.
 - `web/index.html` — links Manrope + Fraunces, sets PWA meta tags, references the manifest.
 - `web/public/manifest.json` — PWA manifest with `name`, `display`, `start_url`.
@@ -28,7 +29,7 @@ If you really want to scaffold by hand:
 ```bash
 git clone https://github.com/freeappstore-online/template-standalone my-app
 cd my-app
-# Replace freeappstore → my-app in package.json, web/index.html, web/src/main.tsx, README, etc.
+# Replace APPNAME → my-app in package.json, web/index.html, web/src/App.tsx, README, etc.
 rm -rf .git && git init
 pnpm install && pnpm dev
 ```

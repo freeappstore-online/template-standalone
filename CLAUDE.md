@@ -11,9 +11,22 @@ Free, MIT-licensed, no tracking. For platform conventions, read
 https://freeappstore.online/skills.md
 before writing or changing anything.
 
+## App shell
+
+`web/src/App.tsx` wraps the app in `<Shell app={fas} appName="APPNAME" nav={NAV} onNavigate={navigate}>`
+from `@freeappstore/sdk/ui`. Keep it as the root and build every screen inside it:
+
+- Add one `NAV` entry per screen (`{ label, href, title }`) and render the screen for `path` in `App`.
+  The Shell turns `NAV` into the app's navigation (`<nav aria-label="Main">`).
+- Start each screen with `<PageHeader title="…" />`. Use `useToast()` for feedback.
+- Don't build your own header, sidebar, tab bar, bottom dock or error boundary; the Shell has them.
+- This template doesn't require sign-in. Pass `requireAuth` only if the whole app needs an account.
+
+Guide: https://docs.freeappstore.online/getting-started/#build-your-app-on-the-shell
+
 ## SDK
 
-This app uses `@freeappstore/sdk` (v0.14.0+). Available modules:
+This app uses `@freeappstore/sdk` (v0.14.30+). Available modules:
 
 - `fas.auth` — OAuth sign-in (SSO across all apps). **Always offer both GitHub and Google sign-in.**
 - `fas.kv` — per-user storage (1MB, 100 keys)
@@ -29,7 +42,7 @@ This app uses `@freeappstore/sdk` (v0.14.0+). Available modules:
 - `fas.friends` — platform-level friend relationships (shared across all apps)
 - `fas.voice` — speech-to-text via `useVoiceInput` hook (React only)
 
-UI components: `import { FasShell, Modal, Card, Tabs, Badge, ... } from '@freeappstore/sdk/ui'`
+UI components: `import { Shell, PageHeader, useToast, Modal, Card, Tabs, Badge, ... } from '@freeappstore/sdk/ui'`
 Hooks: `import { useAuth, useTheme, useFriends, useVoiceInput } from '@freeappstore/sdk/hooks'`
 
 ## Config & secrets
