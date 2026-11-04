@@ -9,7 +9,7 @@ npm i -g @freeappstore/cli
 fas init my-app
 ```
 
-The CLI clones this template, replaces every `APPNAME` placeholder with your app id, runs `git init`, and makes the first commit — the result is a runnable app you can `pnpm dev` immediately.
+The CLI and builder generate app projects from the platform's shared starter foundation. This repository is a release mirror for review and template-specific assets; its `APPNAME`, `APPNAME_JS`, and `APPNAME_TEXT` tokens are source placeholders and are not meant to be replaced manually. Use `fas init` to create a runnable app with a validated ID and safely escaped display name.
 
 ## What's in here
 
@@ -22,15 +22,12 @@ The CLI clones this template, replaces every `APPNAME` placeholder with your app
 - `package.json` — pnpm workspace, `dev` / `build` / `typecheck` / `test` scripts.
 - `.github/workflows/compliance.yml` — runs the same checks as `fas check` on every PR. Source of truth lives in the [`@freeappstore/compliance`](https://www.npmjs.com/package/@freeappstore/compliance) package.
 
-## Cloning manually (not recommended)
-
-If you really want to scaffold by hand:
+## Creating an app
 
 ```bash
-git clone https://github.com/freeappstore-online/template-standalone my-app
+npm i -g @freeappstore/cli
+fas init my-app
 cd my-app
-# Replace APPNAME → my-app in package.json, web/index.html, web/src/App.tsx, README, etc.
-rm -rf .git && git init
 pnpm install && pnpm dev
 ```
 
