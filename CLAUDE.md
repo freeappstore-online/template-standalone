@@ -19,6 +19,9 @@ from `@freeappstore/sdk/ui`. Keep it as the root and build every screen inside i
 - Add one `NAV` entry per screen (`{ label, href, title }`) and render the screen for `path` in `App`.
   The Shell turns `NAV` into the app's navigation (`<nav aria-label="Main">`).
 - Start each screen with `<PageHeader title="…" />`. Use `useToast()` for feedback.
+- The avatar opens the SDK-owned `/profile` page in both auth states. Signed-out visitors choose
+  GitHub or Google there; signed-in users manage their account. Keep `/profile` available and
+  use `profileHref` only when supplying a custom profile page.
 - Don't build your own header, sidebar, tab bar, bottom dock or error boundary; the Shell has them.
 - This template doesn't require sign-in. Pass `requireAuth` only if the whole app needs an account.
 
