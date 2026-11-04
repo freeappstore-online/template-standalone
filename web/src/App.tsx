@@ -13,20 +13,28 @@ const NAV: NavItem[] = [
 ]
 
 export default function App() {
-  const [path, setPath] = useState(() => window.location.pathname)
+  const [currentHref, setCurrentHref] = useState(
+    () => window.location.pathname + window.location.search + window.location.hash,
+  )
+  const path = new URL(currentHref, window.location.href).pathname
 
-  // Keep the screen in step with the browser's back and forward buttons.
+  // Keep URL state in step with back/forward and same-path query/hash changes.
   useEffect(() => {
-    const sync = () => setPath(window.location.pathname)
+    const sync = () =>
+      setCurrentHref(window.location.pathname + window.location.search + window.location.hash)
     window.addEventListener('popstate', sync)
-    return () => window.removeEventListener('popstate', sync)
+    window.addEventListener('hashchange', sync)
+    return () => {
+      window.removeEventListener('popstate', sync)
+      window.removeEventListener('hashchange', sync)
+    }
   }, [])
 
   // Nav clicks switch screens without a page load. Shell scrolls to the top
   // and moves focus to the new screen's PageHeader.
   const navigate = (href: string) => {
     window.history.pushState(null, '', href)
-    setPath(window.location.pathname)
+    setCurrentHref(window.location.pathname + window.location.search + window.location.hash)
   }
 
   return (
